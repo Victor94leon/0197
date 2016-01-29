@@ -7,6 +7,8 @@ public class Organizador
     private ArrayList<String> lista;
     // Objeto de tipo DecimalFormat para guardar formato e información de cada pareja
     private DecimalFormat formato;
+    // ArrayList para guardar las parejas
+    private ArrayList<String> parejas;
     
     /**
      * Constructor de objetos de la clase Organizador
@@ -14,6 +16,7 @@ public class Organizador
     public Organizador()
     {
         lista = new ArrayList<String>();
+        parejas = new ArrayList<String>();
         
         formato = new DecimalFormat("0000");
 
@@ -42,6 +45,7 @@ public class Organizador
         lista.add("Robles González, Miguel Ángel");
         lista.add("Sánchez Manzano, Adán");
         lista.add("Serrano García, Verónica");
+        lista.add("Tascón González, Anibal");
     }
 
     /**
@@ -54,16 +58,38 @@ public class Organizador
         int numeroPareja = 1;
 
         if (lista.size()%2!=0){
-            System.out.println("Pareja nº " + formato.format(numeroPareja++));
-            System.out.println(lista.get(numeroEnLista++));
-            System.out.println(lista.get(numeroEnLista++));
-            System.out.println(lista.get(numeroEnLista++));
+            parejas.add(lista.get(numeroEnLista++) + "/" + lista.get(numeroEnLista++) + "/" + lista.get(numeroEnLista++));
         }
         
-        while (numeroEnLista<lista.size()) {
-            System.out.println("Pareja nº " + formato.format(numeroPareja++));
-            System.out.println(lista.get(numeroEnLista++));
-            System.out.println(lista.get(numeroEnLista++));
+        while (numeroEnLista<lista.size()) {        
+            parejas.add(lista.get(numeroEnLista++) + "/" + lista.get(numeroEnLista++));
         }
+        
+        for (String parejaEnLista : parejas) {
+            System.out.println("Pareja nº " + formato.format(numeroPareja++));    
+            System.out.println(parejaEnLista);
+        }
+    }
+    
+    /**
+     * Método que muestra por pantala los instegrantes de una pareja según el código introducido
+     */
+    public void mostrarPorCodigo(String codigo)
+    {
+        String stringPareja = "0000";
+        
+        if (stringPareja.length() == codigo.length()) {
+            int numeroPareja = 1;
+            for (String parejaEnLista : parejas) {
+                if (formato.format(numeroPareja).equals(codigo)) {
+                    System.out.println("Pareja nº " + formato.format(numeroPareja));   
+                    System.out.println(parejaEnLista);
+                }
+                numeroPareja++;
+            }
+        }
+        else {
+            System.out.println("[ERROR] Código no valido");
+        }     
     }
 }

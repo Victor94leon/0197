@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.text.DecimalFormat;
+import java.util.Iterator;
 public class Organizador
 {
     // ArrayList para guardar String con el nombre de los alumnos
@@ -9,7 +10,7 @@ public class Organizador
     private DecimalFormat formato;
     // ArrayList para guardar las parejas
     private ArrayList<String> parejas;
-    
+
     /**
      * Constructor de objetos de la clase Organizador
      */
@@ -56,28 +57,35 @@ public class Organizador
         Collections.shuffle(lista);
         int numeroEnLista = 0;
         int numeroPareja = 1;
+        parejas.clear();
+        
+        if (parejas.size()!=0) {
+            
+        }
 
         if (lista.size()%2!=0){
-            parejas.add(lista.get(numeroEnLista++) + "/" + lista.get(numeroEnLista++) + "/" + lista.get(numeroEnLista++));
+            parejas.add(lista.get(numeroEnLista++) + " / " + lista.get(numeroEnLista++) + " / " + lista.get(numeroEnLista++));
         }
-        
+
         while (numeroEnLista<lista.size()) {        
-            parejas.add(lista.get(numeroEnLista++) + "/" + lista.get(numeroEnLista++));
+            parejas.add(lista.get(numeroEnLista++) + " / " + lista.get(numeroEnLista++));
         }
+
         
         for (String parejaEnLista : parejas) {
             System.out.println("Pareja nº " + formato.format(numeroPareja++));    
             System.out.println(parejaEnLista);
         }
+        
     }
-    
+
     /**
      * Método que muestra por pantala los instegrantes de una pareja según el código introducido
      */
     public void mostrarPorCodigo(String codigo)
     {
         String stringPareja = "0000";
-        
+
         if (stringPareja.length() == codigo.length()) {
             int numeroPareja = 1;
             for (String parejaEnLista : parejas) {
